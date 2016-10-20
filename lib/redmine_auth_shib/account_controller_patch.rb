@@ -14,7 +14,6 @@ module Redmine::AuthShib
     module InstanceMethods
 
       def login_with_shib
-        #TODO: test 'replace_redmine_login' feature
         if shib_settings["enabled"] && shib_settings["replace_redmine_login"]
           redirect_to :controller => "account", :action => "login_with_shib_redirect", :provider => "shib", :origin => back_url
         else
