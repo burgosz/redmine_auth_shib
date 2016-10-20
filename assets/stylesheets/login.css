@@ -1,9 +1,2 @@
-#shib-login { margin:3em auto 0; font-size:16px; font-weight:bold; text-align:center; }
-#shib-login a, #shib-login a:hover {
-  display:inline-block; padding:0.4em 1em; max-width:800px; text-align:center;
-  color:#fff; background-color:#78cc01; text-decoration:none !important; text-shadow:1px 1px 1px #666;
-  -moz-border-radius:20px; -webkit-border-radius:20px; border-radius:20px;
-}
-#shib-login a:hover { background-color:#70c600; }
-#shib-login a:active { position:relative; top:1px; }
-#login-form table { margin-top:2em; }
+#shib-login { margin-top: 8px; text-align:center; }
+#login-form table { margin-top: 8px; }
