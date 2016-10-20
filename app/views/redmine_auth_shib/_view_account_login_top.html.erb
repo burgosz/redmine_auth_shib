@@ -1,0 +1,11 @@
+<% if Redmine::AuthShib.enabled? %>
+
+<% content_for :header_tags do %>
+  <%= stylesheet_link_tag "login", :plugin => "redmine_auth_shib" %>
+<% end %>
+
+<div id="shib-login">
+  <%= link_to label_for_shib_login, :controller => "account", :action => "login_with_shib_redirect", :provider => "shib"%>
+</div>
+
+<% end %>
