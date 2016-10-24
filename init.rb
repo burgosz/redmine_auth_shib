@@ -19,7 +19,7 @@ Redmine::Plugin.register :redmine_auth_shib do
   url 'https://github.com/burgosz/redmine_auth_shib'
   version '1.0'
   requires_redmine :version_or_higher => '2.3.0'
-  settings :default => { 'enabled' => 'true', 'label_login_with_shib' => '', 'replace_redmine_login' => false  },
+  settings :default => { 'enabled' => 'true', 'replace_redmine_login' => false  },
            :partial => 'settings/auth_shib_settings'
 end
 

@@ -11,12 +11,15 @@ class User
         user = User.new()
         user.login = auth["login"]
         user.language = Setting.default_language
+        user.created_by_auth_shib = true
         user.mail = auth["mail"]
         user.firstname = auth["givenname"]
         user.lastname = auth["surname"]
         user.activate
         user.save!
         user.reload
+      else
+        raise "text_duplicate_email"
       end
     end
     group_membership_from_shib(user, auth["entitlement"])
@@ -37,6 +40,7 @@ class User
           group.lastname = group_name
           group.save!
           group.reload
+          group.created_by_auth_shib = true
         end
         begin
           group.users.append(user)
@@ -44,5 +48,8 @@ class User
         end
       end
     end
+  end
+  def change_password_allowed_with_auth_shib?
+    change_password_allowed_without_auth_shib? && !created_by_auth_shib?
   end
 end

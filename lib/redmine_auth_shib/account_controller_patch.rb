@@ -20,28 +20,34 @@ module Redmine::AuthShib
           login_without_shib
         end
 
-     end
+      end
 
       def login_with_shib_redirect
-         auth = Hash.new
-         auth["login"] = request.env["eppn"]
-         auth["mail"] = request.env["mail"]
-         auth["entitlement"] = request.env["entitlement"]
-         auth["givenname"] = request.env["givenname"]
-         auth["surname"] = request.env["surname"]
-         user = User.login_or_create_from_shib(auth)
-         successful_authentication(user)
+        auth = Hash.new
+        auth["login"] = request.env["eppn"]
+        auth["mail"] = request.env["mail"]
+        auth["entitlement"] = request.env["entitlement"]
+        auth["givenname"] = request.env["givenname"]
+        auth["surname"] = request.env["surname"]
+        begin
+          user = User.login_or_create_from_shib(auth)
+        rescue => error
+          flash[:error] = l(error.message)
+          redirect_to signin_url
+          return
+        end
+        successful_authentication(user)
       end
       def shib_settings
         Redmine::AuthShib.settings_hash
       end
-def logout_with_shib
+      def logout_with_shib
 
-logout_without_shib
-end
+        logout_without_shib
+      end
 
-end
-end
+    end
+  end
 end
 
 unless AccountController.included_modules.include? Redmine::AuthShib::AccountControllerPatch

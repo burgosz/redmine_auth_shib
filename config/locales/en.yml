@@ -6,3 +6,4 @@ en:
   text_full_logout_proposal: You may want to %{value} before trying an other username.
   text_logout_from_shib: close SSO session
   label_onthefly_creation: Create users automatically?
+  text_duplicate_email: That e-mail address is already exists in the database for an other user. Please contact the administrator.

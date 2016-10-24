@@ -12,10 +12,6 @@ module Redmine::AuthShib
     def onthefly_creation?
       enabled? && settings_hash["onthefly_creation"]
     end
-
-    def label_login_with_shib
-      settings_hash["label_login_with_saml"]
-    end
   end
 
 end
