@@ -27,8 +27,16 @@ module Redmine::AuthShib
         auth["login"] = request.env["eppn"]
         auth["mail"] = request.env["mail"]
         auth["entitlement"] = request.env["entitlement"]
-        auth["givenname"] = request.env["givenname"]
-        auth["surname"] = request.env["surname"]
+        if request.env["givenName"].nil?
+		auth["givenName"] = "TBA"
+	else
+	        auth["givenName"] = request.env["givenName"]
+	end
+        if request.env["sn"].nil?
+                auth["sn"] = "TBA"
+        else
+        	auth["sn"] = request.env["sn"]
+        end
         begin
           user = User.login_or_create_from_shib(auth)
         rescue => error
@@ -36,6 +44,7 @@ module Redmine::AuthShib
           redirect_to signin_url
           return
         end
+	user.update_attribute(:last_login_on, Time.now)
         successful_authentication(user)
       end
       def shib_settings

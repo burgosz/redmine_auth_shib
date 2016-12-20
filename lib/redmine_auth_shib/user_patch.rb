@@ -8,14 +8,16 @@ class User
     unless user
       user = EmailAddress.find_by(address: auth["mail"]).try(:user)
       if user.nil? && Redmine::AuthShib.onthefly_creation?
+        auth_source = AuthSource.find_by_name("redmine_auth_shib").id
         user = User.new()
         user.login = auth["login"]
         user.language = Setting.default_language
         user.created_by_auth_shib = true
         user.mail = auth["mail"]
-        user.firstname = auth["givenname"]
-        user.lastname = auth["surname"]
+        user.firstname = auth["givenName"]
+        user.lastname = auth["sn"]
         user.activate
+	user.auth_source_id = auth_source
         user.save!
         user.reload
       else
