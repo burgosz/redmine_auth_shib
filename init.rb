@@ -5,7 +5,7 @@ require 'redmine_auth_shib/user_patch'
 
 
 # Patches to existing classes/modules
-ActionDispatch::Callbacks.to_prepare do
+ActiveSupport::Reloader.to_prepare do
   require_dependency 'redmine_auth_shib/account_helper_patch'
   require_dependency 'redmine_auth_shib/account_controller_patch'
 end
