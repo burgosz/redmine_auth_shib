@@ -5,7 +5,7 @@
 <% end %>
 
 <div id="shib-login">
-  <%= link_to image_tag("eduid.png", size:"250x35", :plugin => "redmine_auth_shib"), {:controller => "account", :action => "login_with_shib_redirect", :provider => "shib"}%>
+        <%= link_to image_tag("eduid.png", size:"250x35", :plugin => "redmine_auth_shib"), {:controller => "account", :action => "login_with_shib_redirect", :provider => "shib", :back_url => params[:back_url] }%>
 </div>
 
 <% end %>
